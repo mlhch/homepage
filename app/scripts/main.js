@@ -1,1 +1,4 @@
-console.log('\'Allo \'Allo!');
+require({
+    waitSeconds: 0,
+    baseUrl: 'bower_components'
+});

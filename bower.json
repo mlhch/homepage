@@ -2,6 +2,8 @@
   "name": "webapp",
   "version": "0.0.0",
   "dependencies": {
+    "requirejs": "*",
+    "d3": "~3.3.10",
     "modernizr": "~2.6.2",
     "jquery": "~1.10.2"
   },
