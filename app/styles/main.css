@@ -86,6 +86,19 @@
   width: 100%;
 }
 
+g.node circle {
+  fill: silver;
+  fill-opacity: 0.7;
+  stroke: gray;
+}
+g.node text {
+  font-size: 9px;
+}
+
+line.link {
+  stroke: orange;
+}
+
 @media all and (max-width: 890px) {
   h1 {
     font-size: 24px;
