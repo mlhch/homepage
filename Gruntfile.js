@@ -259,6 +259,14 @@ module.exports = function (grunt) {
                         'images/{,*/}*.{webp,gif,png}',
                         'styles/fonts/{,*/}*.*'
                     ]
+                }, {
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= yeoman.app %>',
+                    dest: '<%= yeoman.dist %>',
+                    src: [
+                        'bower_components/d3/d3.min.js'
+                    ]
                 }]
             },
             styles: {
