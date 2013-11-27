@@ -142,13 +142,31 @@ line.link {
   }
 }
 
-@media all and (max-width: 890px) {
-  h1 {
-    font-size: 24px;
+.fa-envelope-o {
+  transform: scale(0.8)
+}
+
+.at .fa-circle-o {
+  transform: scale(0.7)
+}
+
+.odesk.fa-stack {
+  width: 1.2857142857142858em;
+  height: 1em;
+  line-height: 1;
+  vertical-align: baseline;
+  .fa-square {
+    color: #35b137;
   }
-  h2 {
-    font-size: 24px;
-    padding-top: 54px;
+  .fa-circle-o {
+    font-size: 0.1em;
+    top: 6px;
+  }
+  .fa-circle {
+    font-size: 0.3em;
+    top: 16px;
+    overflow: hidden;
+    clip: rect(0px, 100px, 5px, 0px);
   }
 }
 @media all and (max-width: 720px) {
