@@ -265,6 +265,8 @@ module.exports = function (grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
+                        'bower_components/font-awesome/{fonts,css}/*',
+                        'bower_components/foundation/css/*',
                         'bower_components/require-css/css.min.js',
                         'bower_components/fancybox/source/{,*/}*.*',
                         'bower_components/d3/d3.min.js'
