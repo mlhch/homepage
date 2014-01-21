@@ -6,10 +6,15 @@ require({
         }
     },
     paths: {
+        moment: 'momentjs/moment',
+        angular: 'angular/angular.min',
         d3: 'd3/d3.min'
     },
     shim: {
-        'd3': {
+        angular: {
+            exports: 'angular'
+        },
+        d3: {
             exports: 'd3'
         }
     },

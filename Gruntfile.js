@@ -268,6 +268,8 @@ module.exports = function (grunt) {
                         'bower_components/font-awesome/{fonts,css}/*',
                         'bower_components/foundation/css/*',
                         'bower_components/momentjs/moment.js',
+                        'bower_components/angular/angular-csp.css',
+                        'bower_components/angular/angular.min.js',
                         'bower_components/require-css/css.min.js',
                         'bower_components/fancybox/source/{,*/}*.*',
                         'bower_components/d3/d3.min.js'

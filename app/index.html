@@ -12,6 +12,8 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="bower_components/angular/angular-csp.css">
+
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -48,7 +50,23 @@
         <div class="section recent">
             <a class="anchor" id="recent"></a>
             <h1><i class="fa fa-puzzle-piece"></i> Recent Updates</h1>
-		</div>
+            <div class="ng-hide" ng-show="recentLoaded()">
+                <div class="row">
+                    <div class="small-12 small-centered medium-8 large-6 columns">
+                        <ul>
+                            <li ng-repeat="row in recent">
+                                <a ng-click="showArticle(row)">{{row.title}}</a>
+                                <span class="right">{{row.time}}</span>
+                            </li>
+                        </ul>
+                        <div class="pagination-centered">
+                            <a class="left" ng-show="!isFirst()" ng-click="recentGoPrev()">&lt;&lt; Previous</a>
+                            <a class="right" ng-show="!isLast()" ng-click="recentGoNext()">Next &gt;&gt;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="section skills">
             <a class="anchor" id="skills"></a>
             <h1 class="fa-inverse"><i class="fa fa-suitcase fa-inverse"></i> Skills & Interests</h1>
@@ -105,6 +123,7 @@
         <script src="scripts/config.js"></script>
         <script src="scripts/main.js"></script>
         <script src="scripts/smooth.js"></script>
+        <script src="scripts/recent.js"></script>
         <script src="scripts/skills.js"></script>
         <script src="scripts/map.js"></script>
         <!-- endbuild -->
