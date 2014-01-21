@@ -18,6 +18,11 @@
   padding: 0 20px;
 }
 
+.recent li span {
+  color: silver;
+  font-size: 12px;
+}
+
 .showcase {
   background-image: url(../images/bg.jpg);
 }

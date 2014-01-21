@@ -59,7 +59,7 @@ define('config', function() {
 
 		var urls = {
 			tagsdata: host + '/articles/tags' + format,
-			recentArticles: host + '/articles/latest/0/branch' + format,
+			recentArticles: repo + '/git/refs/heads',
 			articleBlob: function(title, sha) {
 				return host + '/articles/blob/' + title + '/' + sha;
 			},
