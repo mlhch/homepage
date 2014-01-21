@@ -26,6 +26,19 @@
 .showcase {
   background-image: url(../images/bg.jpg);
 }
+.showcase .snapshot {
+  width: 80%;
+  margin: auto;
+}
+.showcase .snapshot .image {
+  height: 400px;
+  overflow: auto;
+}
+.showcase .snapshot .name {
+  color: white;
+  text-align: center;
+  padding: 5px;
+}
 
 .contact-me {
   background-color: #a5bfdd;

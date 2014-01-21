@@ -58,7 +58,7 @@ define('config', function() {
 			repo = 'https://api.github.com/repos/mlhch/articles';
 
 		var urls = {
-			tagsdata: host + '/articles/tags' + format,
+			articlesTags: repo + '/git/refs/tags',
 			recentArticles: repo + '/git/refs/heads',
 			articleBlob: function(title, sha) {
 				return host + '/articles/blob/' + title + '/' + sha;

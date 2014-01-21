@@ -27,6 +27,19 @@
 }
 .showcase {
   background-image: url(../images/bg.jpg);
+  .snapshot {
+    width: 80%;
+    margin: auto;
+    .image {
+      height: 400px;
+      overflow: auto;
+    }
+    .name {
+      color: white;
+      text-align: center;
+      padding: 5px;
+    }
+  }
 }
 .contact-me {
   background-color: #a5bfdd;
