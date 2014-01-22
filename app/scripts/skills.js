@@ -16,6 +16,40 @@ require(['d3', 'config'], function(d3, config) {
                 position: 'relative'
             });
 
+    svg
+        .on('mousemove', function fn() {
+            var m = d3.mouse(this),
+                mx = m[0],
+                my = m[1],
+                r = 100;
+
+            svg.selectAll('.node').attr('transform', function fn(node, index) {
+                var dx = node.x - mx,
+                    dy = node.y - my,
+                    d = Math.sqrt(dx * dx + dy * dy),
+                    k = d / r,
+                    theta = Math.atan2(dy, dx),
+                    scale = 1;
+                if (k < 1 && index != 0) {
+                    node.tx = mx + r * Math.cos(theta) * (k < 0.2 ? 3 * k : Math.sqrt(1 - (1 - k) * (1 - k)));
+                    node.ty = my + r * Math.sin(theta) * (k < 0.2 ? 3 * k : Math.sqrt(1 - (1 - k) * (1 - k)));
+                    scale = 0.5 + 1 * Math.cos(k * Math.PI / 2);
+                } else {
+                    node.tx = node.x;
+                    node.ty = node.y;
+                }
+                return "translate(" + node.tx + "," + node.ty + ") scale(" + scale + ")";
+            });
+            svg.selectAll('.link').each(function fn(link) {
+                d3.select(this).attr({
+                    x1: link.source.tx,
+                    y1: link.source.ty,
+                    x2: link.target.tx,
+                    y2: link.target.ty
+                });
+            });
+        });
+
     /**
      * 鼠标移动特效
      */
