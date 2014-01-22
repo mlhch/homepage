@@ -5,7 +5,9 @@
     "requirejs": "*",
     "d3": "~3.3.10",
     "modernizr": "~2.6.2",
-    "jquery": "~1.10.2"
+    "jquery": "~1.10.2",
+    "fancybox": "~2.1.5",
+    "require-css": "~0.1.2"
   },
   "devDependencies": {}
 }
