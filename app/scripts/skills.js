@@ -16,6 +16,92 @@ require(['d3', 'config'], function(d3, config) {
                 position: 'relative'
             });
 
+    /**
+     * 鼠标移动特效
+     */
+    if (config.canvasMovable) {
+        (function() {
+            var idle = true,
+                z = 4,
+                cx = containerWidth / 2,
+                cy = containerHeight / 2,
+                df, cf = [canvasWidth / 2, canvasHeight / 2],
+                style = document.body.style,
+                transform = ("webkitTransform" in style ? "-webkit-" //
+                    : "MozTransform" in style ? "-moz-" //
+                    : "msTransform" in style ? "-ms-" //
+                    : "OTransform" in style ? "-o-" : "") + "transform",
+                enableMoveNodes = true,
+                returnToCenter = false;
+
+            function moveCanvas(mx, my) {
+                df = [Math.round((mx - cx) / z) * z + cx, Math.round((my - cy) / z) * z + cy];
+
+                if (idle) {
+                    d3.timer(function() {
+                        idle = Math.abs(df[0] - cf[0]) < .5 && Math.abs(df[1] - cf[1]) < .5
+                        if (idle) {
+                            cf = df;
+                        } else {
+                            cf[0] += (df[0] - cf[0]) * .14;
+                            cf[1] += (df[1] - cf[1]) * .14;
+                        }
+                        x = (cx - cf[0]) / z, y = (cy - cf[1]) / z;
+                        canvas.style(transform, "translate(" + x + "px," + y + "px)");
+                        return idle;
+                    });
+                }
+            }
+
+            function moveNodes(mx, my) {
+                return;
+                var dx = mx / containerWidth - 0.5, // -0.5 ~ 0.5
+                    dy = my / containerHeight - 0.5;
+                svg.selectAll('.node').attr('transform', function fn(node) {
+                    /*var rx = node.x - cf[0],
+                    ry = node.y - cf[1],
+                    r = Math.sqrt(rx * rx + ry * ry) * 0.75,
+                    l = node.level || 0,
+                    d = l == 1 ? 100 : l == 2 ? 150 : l == 3 ? 100 : 0;
+                node.tx = node.x - cf[0] / Math.max(cf[0] / 2, r) * d * dx;
+                node.ty = node.y - cf[1] / Math.max(cf[1] / 2, r) * d * dy;
+                return "translate(" + node.tx + "," + node.ty + ")";*/
+                    var dx = node.x - mx,
+                        dy = node.y - my,
+                        d = Math.sqrt(dx * dx + dy * dy),
+                        scale = 1;
+                    if (d < r) {
+                        node.tx = mx + dx * rr;
+                        node.ty = mx + dy * rr;
+                        scale = rr - d / r;
+                    } else {
+                        node.tx = node.x;
+                        node.ty = node.y;
+                    }
+                    return "translate(" + node.tx + "," + node.ty + ") scale(" + scale + ")";
+                });
+                svg.selectAll('.link').each(function fn(link) {
+                    d3.select(this).attr({
+                        x1: link.source.tx,
+                        y1: link.source.ty,
+                        x2: link.target.tx,
+                        y2: link.target.ty
+                    });
+                });
+            }
+
+            container
+                .on('mouseout', function() {
+                    returnToCenter && moveCanvas(cx, cy);
+                    enableMoveNodes && moveNodes(cx, cy);
+                })
+                .on('mousemove', function() {
+                    var m = d3.mouse(this);
+                    moveCanvas(m[0], m[1]);
+                    enableMoveNodes && moveNodes(m[0], m[1]);
+                });
+        })();
+    }
 
     config.articlesTags(function success(res) {
 

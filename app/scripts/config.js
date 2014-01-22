@@ -8,6 +8,7 @@ define('config', function() {
 	}
 
 	envs.prototype = {
+		canvasMovable: false,
 		articlesTags: function() {
 			console.log('[env.articlesTags]');
 		}
