@@ -79,17 +79,67 @@
 }
 
 g.node {
-  circle {
-    fill: silver;
-    fill-opacity: 0.7;
-    stroke: gray;
+  a {
+    white-space: nowrap;
+    transform: scale(0.5);
   }
-  text {
-    font-size: 9px;
+  rect {
+    fill: red;
+    fill-opacity: 0;
+    radius: 5;
+  }
+  circle, ellipse {
+    stroke: green;
+    fill: white;
+    fill-opacity: 0.7;
+  }
+  text, tspan {
+    font-size: 12px;
+    fill: #4cc2e4;
+  }
+  &.real * {
+    cursor: pointer;
+  }
+  &.real tspan {
+    fill: blue;
+  }
+  &.skill circle {
+    fill: orange;
+    fill-opacity: 0.3;
+  }
+  &.skill text {
+    fill: orange;
+  }
+  &.subskill text {
+    fill: yellow;
+  }
+  &.showcase circle {
+    fill: silver;
+  }
+  &.hl {
+    text {
+      fill: white;
+    }
+    rect {
+      fill-opacity: 1
+    }
   }
 }
 line.link {
-  stroke: orange;
+  stroke: silver;
+  opacity: 0.5;
+  &.showcase {
+    stroke: gray;
+  }
+  &.skill {
+    stroke: orange;
+  }
+  &.subskill {
+    fill: yellow;
+  }
+  &.combine {
+    stroke: green;
+  }
 }
 
 @media all and (max-width: 890px) {

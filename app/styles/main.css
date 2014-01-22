@@ -86,17 +86,65 @@
   width: 100%;
 }
 
-g.node circle {
-  fill: silver;
-  fill-opacity: 0.7;
-  stroke: gray;
+g.node a {
+  white-space: nowrap;
+  transform: scale(0.5);
 }
-g.node text {
-  font-size: 9px;
+g.node rect {
+  fill: red;
+  fill-opacity: 0;
+  radius: 5;
+}
+g.node circle, g.node ellipse {
+  stroke: green;
+  fill: white;
+  fill-opacity: 0.7;
+}
+g.node text, g.node tspan {
+  font-size: 12px;
+  fill: #4cc2e4;
+}
+g.node.real * {
+  cursor: pointer;
+}
+g.node.real tspan {
+  fill: blue;
+}
+g.node.skill circle {
+  fill: orange;
+  fill-opacity: 0.3;
+}
+g.node.skill text {
+  fill: orange;
+}
+g.node.subskill text {
+  fill: yellow;
+}
+g.node.showcase circle {
+  fill: silver;
+}
+g.node.hl text {
+  fill: white;
+}
+g.node.hl rect {
+  fill-opacity: 1;
 }
 
 line.link {
+  stroke: silver;
+  opacity: 0.5;
+}
+line.link.showcase {
+  stroke: gray;
+}
+line.link.skill {
   stroke: orange;
+}
+line.link.subskill {
+  fill: yellow;
+}
+line.link.combine {
+  stroke: green;
 }
 
 @media all and (max-width: 890px) {

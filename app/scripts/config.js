@@ -14,7 +14,7 @@ define('config', function() {
 	}
 
 	envs.dev = function(env) {
-		var host = 'http://localhost/api';
+		var host = 'http://' + location.hostname + '/api';
 
 		var urls = {
 			tagsdata: host + '/articles/tags',
