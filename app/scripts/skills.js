@@ -16,7 +16,25 @@ require(['d3', 'config'], function(d3, config) {
                 position: 'relative'
             });
 
+    /**
+     * 点击 svg 中的节点，在 fancybox 中显示文章内容
+     */
     svg
+        .on('click', function showSkill() {
+            var node, $node = $(d3.event.target).closest('.node');
+            if ($node.length && (node = d3.select($node[0]).data()[0]) && node.title) {
+                d3.json(config.urls.articleBlob(node.title), function fn(res) {
+                    if (res === null) return;
+
+                    require(['fancybox'], function(fancybox) {
+                        fancybox(res.content, {
+                            title: res.title,
+                            margin: [50, 50, 50, 50]
+                        });
+                    });
+                });
+            }
+        })
         .on('mousemove', function fn() {
             var m = d3.mouse(this),
                 mx = m[0],
