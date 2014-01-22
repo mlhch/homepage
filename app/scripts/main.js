@@ -6,16 +6,19 @@ require({
         }
     },
     paths: {
-        d3: 'd3/d3'
+        d3: 'd3/d3.min'
     },
     shim: {
-        fancybox: {
-            deps: ['fancybox/source/jquery.fancybox.pack', 'css!fancybox/source/jquery.fancybox'],
-            exports: '$.fancybox'
-        },
         'd3': {
             exports: 'd3'
         }
     },
     baseUrl: 'bower_components'
+});
+
+define('fancybox', [
+    'fancybox/source/jquery.fancybox.pack',
+    'css!fancybox/source/jquery.fancybox'
+], function() {
+    return $.fancybox;
 });
