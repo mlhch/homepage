@@ -2,6 +2,12 @@ require(['angular', 'moment', 'config'], function fn(angular, moment, config) {
     angular.element(document).ready(function() {
         angular.module('app', []).controller('MainCtrl', ['$scope',
             function fn($scope) {
+                $scope.status = 'loading';
+                $scope.statusClasses = {
+                    failure: 'alert-box warning',
+                    loading: 'loading',
+                    success: 'ng-hide'
+                };
                 var start = 0,
                     limit = 25,
                     recentUpdates = [];
@@ -13,6 +19,11 @@ require(['angular', 'moment', 'config'], function fn(angular, moment, config) {
                             return row;
                         });
                         recentGo();
+                    });
+                }, function failure() {
+                    $scope.$apply(function() {
+                        $scope.status = 'failure';
+                        $scope.errMsg = 'No response from server';
                     });
                 });
 

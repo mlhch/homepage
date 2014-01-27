@@ -51,6 +51,9 @@
         <div class="section recent">
             <a class="anchor" id="recent"></a>
             <h1><i class="fa fa-puzzle-piece"></i> Recent Updates</h1>
+            <div class="text-center" ng-class="statusClasses[status]">
+                <span class="ng-hide" ng-show="errMsg">{{errMsg}}</span>
+            </div>
             <div class="ng-hide" ng-show="recentLoaded()">
                 <div class="row">
                     <div class="small-12 small-centered medium-8 large-6 columns">
@@ -77,6 +80,9 @@
                 <label class="columns large-2 medium-2 small-3">
                     <input type="checkbox" name="Knowledge"> Interests</label>
             </div>
+            <div class="canvas">
+                <div class="text-center loading"></div>
+            </div>
         </div>
         <div class="section showcase">
             <a class="anchor" id="showcase"></a>
@@ -86,6 +92,7 @@
                 <div class="name"></div>
             </div>
             <div class="carousel"></div>
+            <div class="text-center loading"></div>
         </div>
         <div class="section contact-me">
             <a class="anchor" id="contact-me"></a>

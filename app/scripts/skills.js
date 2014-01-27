@@ -1,6 +1,7 @@
 require(['d3', 'config'], function(d3, config) {
-    var containerHeight = 700,
-        container = d3.select(d3.select('#skills').node().parentNode).append('div')
+    var section = d3.select(d3.select('#skills').node().parentNode),
+        containerHeight = 700,
+        container = d3.select('.section.skills .canvas')
             .style('height', containerHeight + 'px')
             .style('overflow', 'hidden')
             .style('border', '1px solid silver'),
@@ -156,6 +157,7 @@ require(['d3', 'config'], function(d3, config) {
     }
 
     config.articlesTags(function success(res) {
+        section.select('.loading').attr('class', 'ng-hide');
 
         // 手动指定固定于中心点的 Skills 节点
         var width = canvasWidth,
@@ -257,6 +259,10 @@ require(['d3', 'config'], function(d3, config) {
             drawNodesAndLinks(force);
             force.start();
         });
+    }, function() {
+        section.select('.loading')
+            .attr('class', 'text-center alert-box warning')
+            .html('No response from server');
     });
 
     function nodesFilter(nodes) {
