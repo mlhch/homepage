@@ -148,7 +148,7 @@ require(['d3', 'config'], function(d3, config) {
     }
 
     function parseNodesAndLinks(res, nodes, links) {
-        var parent, group, name, title, link, pnode, cnode, names, path, category, map = {};
+        var map = {};
 
         // 给预先设置的节点一个机会
         nodes.forEach(function(node) {
@@ -156,64 +156,53 @@ require(['d3', 'config'], function(d3, config) {
         });
         /**
          * 从原始数据组织 nodes 和 links
-         * res is like ["CKEditor|Showcase - My Journal", ...]
          */
         res.forEach(function fn(row) {
-            parent = group = category = '';
-            names = [];
-            row.split('|').forEach(function(tag, i) {
-                if (!group || tag.match(/^Showcase/)) {
-                    return group = tag;
-                }
-                category = category || group;
-                group === 'Knowledge' && (group = 'Skill');
-                names.push(name = (title = tag).replace(/^.* - /g, ''));
-                path = names.join('->');
+            // row is considered as "category|nodeA|nodeB|...|title"
+            var node, level = 0,
+                path = '',
+                parts = row.split('|'),
+                title = parts.pop().replace(/^.*? - /g, ''),
+                category = parts.shift();
 
-                // 创建虚拟的节点
-                (cnode = map[path]) || nodes.push(cnode = map[path] = {
-                    name: name,
-                    level: i,
-                    categories: {},
-                    links: []
+            if (category == 'Showcase') {
+                makeNode('|' + parts.join('|'), parts.pop(), title);
+            } else {
+                node = makeNode(nodes[0] && nodes[0].name || '', 'Root', category, level++);
+                parts.forEach(function(name) {
+                    makeLink(node, node = makeNode(path += '|' + name, name, category, level++));
                 });
-                cnode.categories[category] = 1;
-
-                if (parent) {
-                    map[parent].categories[category] = 1;
-                    if (parent !== name && !map[parent + '--' + name]) {
-                        link = map[parent + '--' + name] = {
-                            source: map[parent],
-                            target: cnode
-                        };
-                        links.push(link);
-                        map[parent].links.push(link);
-                        cnode.links.push(link);
-                    }
-                } else {
-                    // 这里只为第一层赋予 group 值
-                    cnode.group = group.toLowerCase();
-                    // 把第一级非 Showcase 都认定为基本 Skills，所以此处创建它们与 Skills 结点的连线
-                    if (map[group]) {
-                        map[group].categories[category] = 1;
-                        if (!map[group + '--' + name]) {
-                            links.push(link = map[group + '--' + name] = {
-                                source: map[group],
-                                target: cnode
-                            });
-                            map[group].links.push(link);
-                            cnode.links.push(link);
-                        }
-                    } else {
-                        cnode.group = 'Skill';
-                    }
-                }
-                parent = names.join('->');
-            });
-
-            // 最后一个 name 对应的是 title
-            cnode.title = title;
+                makeLink(node, makeNode(path + '|' + title, title, category, level++));
+            }
         });
+
+        return;
+
+        function makeNode(path, name, category, level) {
+            var node = map[path];
+            if (!node) {
+                nodes.push(map[path] = node = {
+                    name: name,
+                    categories: {},
+                    links: [],
+                    group: level == 1 ? 'skill' : ''
+                });
+            }
+            node.categories[category] = 1;
+            return node;
+        }
+
+        function makeLink(pnode, cnode) {
+            var key = pnode.name + '<-->' + cnode.name;
+            if (!map[key]) {
+                links.push(link = map[key] = {
+                    source: pnode,
+                    target: cnode
+                });
+                pnode.links.push(link);
+                cnode.links.push(link);
+            }
+        }
     }
 
     function prepareNodesAndLinks(nodes, links) {
