@@ -157,6 +157,7 @@ require(['d3', 'config'], function(d3, config) {
     }
 
     config.articlesTags(function success(res) {
+        parseShowcases(res);
         section.select('.loading').attr('class', 'ng-hide');
 
         // 手动指定固定于中心点的 Skills 节点
@@ -259,6 +260,45 @@ require(['d3', 'config'], function(d3, config) {
             drawNodesAndLinks(force);
             force.start();
         });
+
+        function parseShowcases(res) {
+            var m, container = section.select('.side-nav')
+                    .style('position', 'absolute')
+                    .style('z-index', '10')
+                    .style('padding-left', '15px');
+            res.forEach(function(row, i) {
+                if (m = row.match(/^Showcase\|(?:http:)?\/\/.*\|(.*)$/)) {
+                    container.append('li').append('label')
+                        .attr('class', 'radius secondary label').html(m[1].replace(/^.*? - /, ''))
+                        .style('cursor', 'pointer')
+                        .on('mouseover', highlightShowcase)
+                        .on('click', showSnapshot);
+                    delete res[i];
+                }
+            });
+        }
+
+        function highlightShowcase() {
+            section.selectAll('.side-nav label').each(function() {
+                d3.select(this).attr('class', 'radius secondary label');
+            });
+
+            var caseName = d3.select(this).attr('class', 'radius label').html();
+            svg.selectAll('.node.hl').each(function fn(node) {
+                d3.select(this).attr('class', 'node');
+            });
+            svg.selectAll('.node').each(function fn(node) {
+                if (node.categories[caseName]) {
+                    d3.select(this).attr('class', 'node hl');
+                }
+            });
+        }
+
+        function showSnapshot() {
+            document.dispatchEvent(new CustomEvent('showcaseSelected', {
+                detail: d3.select(this).html()
+            }));
+        }
     }, function() {
         section.select('.loading')
             .attr('class', 'text-center alert-box warning')
