@@ -1,0 +1,171 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ma Lian's Skill Tree</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="stylesheet" href="bower_components/foundation/css/foundation.min.css">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="bower_components/angular/angular-csp.css">
+
+        <link rel="stylesheet" href="styles/3911c419.main.css"/>
+        <script src="scripts/vendor/d7100892.modernizr.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="header">
+            <div class="wrap">
+                <a class="logo" href="./"><img src="images/logo.png" width="80"></a>
+                <div class="menu">
+                    <a href="#intro">Introduction</a>
+                    <a href="#recent">Recent Updates</a>
+                    <a href="#skills">Skills & Interests</a>
+                    <a href="#showcase">Showcase</a>
+                    <a href="#contact-me">Contact Me</a>
+                </div>
+                <form class="menu-dropdown">
+                    <select>
+                        <option value="#intro">Introduction</option>
+                        <option value="#recent">Recent Updates</option>
+                        <option value="#skills">Skills & Interests</option>
+                        <option value="#showcase">Showcase</option>
+                        <option value="#contact-me">Contact Me</option>
+                    </select>
+                </form>
+            </div>
+        </div> <!-- /header -->
+        <div class="header-placeholder"></div>
+
+        <div class="section intro">
+            <a class="anchor" id="intro"></a>
+            <h1><i class="fa"></i> Introduction</h1>
+            <div class="row">
+                <div class="small-12 small-centered medium-9 large-7 columns">
+                    <p class="lead">
+                        I'm a Software Engineer, dived into IT industry since 2006, and started software outsourcing experience since 2008.</p>
+                    <p class="lead">
+                        I create this page for better self-presentation and make you could trust me as more as possible.
+                    </p>
+                    <ul>
+                        <li>
+                            <blockquote>
+                                From section <strong><a href="#recent">Recent Updates</a></strong> you can know my recent knowledge activities. Just to clarify, they are free notes rather than well organized articles.
+                            </blockquote>
+                        </li>
+                        <li>
+                            <blockquote>
+                                In section <strong><a href="#skills">Skills & Interests</a></strong> I separate out those skills that for sale, so that you can get a quick impression.
+                            </blockquote>
+                        </li>
+                        <li>
+                            <blockquote>
+                                <strong><a href="#showcase">Showcase</a></strong> section show some of my previous examples. They are not all, but I'm preparing them little by little when I have spare time.
+                            </blockquote>
+                        </li>
+                        <li>
+                            <blockquote>
+                                <strong><a href="#contact-me">Contact Me</a></strong> if you are interested in my abilities.
+                            </blockquote>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="section recent">
+            <a class="anchor" id="recent"></a>
+            <h1><i class="fa fa-puzzle-piece"></i> Recent Updates</h1>
+            <div class="text-center" ng-class="statusClasses[status]">
+                <span class="ng-hide" ng-show="errMsg">{{errMsg}}</span>
+            </div>
+            <div class="ng-hide" ng-show="recentLoaded()">
+                <div class="row">
+                    <div class="small-12 small-centered medium-8 large-6 columns">
+                        <ul>
+                            <li ng-repeat="row in recent">
+                                <a ng-click="showArticle(row)">{{row.title}}</a>
+                                <span class="right">{{row.time}}</span>
+                            </li>
+                        </ul>
+                        <div class="pagination-centered">
+                            <a class="left" ng-show="!isFirst()" ng-click="recentGoPrev()">&lt;&lt; Previous</a>
+                            <a class="right" ng-show="!isLast()" ng-click="recentGoNext()">Next &gt;&gt;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section skills">
+            <a class="anchor" id="skills"></a>
+            <h1 class="fa-inverse"><i class="fa fa-suitcase fa-inverse"></i> Skills & Interests</h1>
+            <div class="row">
+                <p class="label text-left radius columns large-8 medium-8 small-7" style="background: transparent; white-space: normal">
+                    Mouse over a showcase to highlight related skills
+                </p>
+                <label class="columns large-2 medium-2 small-2">
+                    <input type="checkbox" name="Skill" checked="checked"> Skills</label>
+                <label class="columns large-2 medium-2 small-3">
+                    <input type="checkbox" name="Knowledge"> Interests</label>
+            </div>
+            <ul class="side-nav"></ul>
+            <div class="canvas">
+                <div class="text-center loading"></div>
+            </div>
+        </div>
+        <div class="section showcase">
+            <a class="anchor" id="showcase"></a>
+            <h1 class="fa-inverse"><i class="fa fa-film"></i> Showcase</h1>
+            <div class="snapshot hide">
+                <div class="image"><a target="_blank"><img></a></div>
+                <div class="name"></div>
+            </div>
+            <div class="carousel"></div>
+            <div class="text-center loading"></div>
+        </div>
+        <div class="section contact-me">
+            <a class="anchor" id="contact-me"></a>
+            <h1><i class="fa fa-comments-o"></i> Contact Me</h1>
+            <div class="row">
+                <div class="small-12 medium-9 large-8 columns">
+                    <div id="map"></div>
+                </div>
+                <div class="medium-3 large-4 columns">
+                    <p><i class="fa fa-fw fa-envelope-o fa-2x"></i> malhch<span class="fa-stack at">
+                        <i class="fa fa-circle-o fa-stack-2x"></i>
+                        <i class="fa fa-stack-1x">a</i></span>gmail.com</p>
+                    <p><i class="fa fa-fw fa-skype fa-2x"></i> ID: malhch</p>
+                    <p><span class="fa fa-fw fa-stack fa-2x odesk">&#160;
+                        <i class="fa fa-fw fa-square fa-stack-1x"></i>
+                        <i class="fa fa-fw fa-circle-o fa-stack-1x fa-inverse"></i>
+                        <i class="fa fa-fw fa-circle fa-stack-1x fa-inverse"></i>
+                    </span> ID: mlhch (Ma Lian)</p>
+                </div>
+            </div>
+        </div>
+
+        <script src="scripts/8d1ee654.vendor.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-3309709-8']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
+
+        <script src="scripts/6b029a75.main.js"></script>
+</body>
+</html>
