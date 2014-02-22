@@ -14,10 +14,10 @@ require(['angular', 'moment', 'config'], function fn(angular, moment, config) {
                 config.recentArticles(function success(res) {
                     $scope.$apply(function() {
                         $scope.status = 'success';
-                        recentUpdates = res.map(function fn(row) {
-                            row.time = moment(row.time).fromNow();
-                            return row;
+                        res.forEach(function fn(row) {
+                            row.time = moment(row.time * 1000).fromNow();
                         });
+                        recentUpdates = res;
                         recentGo();
                     });
                 }, function failure() {
