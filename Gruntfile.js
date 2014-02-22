@@ -303,6 +303,11 @@ module.exports = function (grunt) {
             test: [
                 'copy:styles'
             ],
+            prod: [
+                'compass',
+                'copy:styles',
+                'copy:prod'
+            ],
             dist: [
                 'compass',
                 'copy:styles',
@@ -316,6 +321,16 @@ module.exports = function (grunt) {
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'connect:dist:keepalive']);
+        }
+
+        if (target === 'prod') {
+            return grunt.task.run([
+                'clean:server',
+                'concurrent:prod',
+                'autoprefixer',
+                'connect:livereload',
+                'watch'
+            ]);
         }
 
         grunt.task.run([
