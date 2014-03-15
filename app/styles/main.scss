@@ -3,6 +3,14 @@
   padding: 0;
 }
 
+.button.radius {
+  border-radius: 10px;
+  padding: 0.6em 1em !important;
+  position: absolute;
+  top: 20px;
+  left: 150px;
+}
+
 .loading {
   height: 30px;
   background: url(../images/preloader.gif) 50% 0 no-repeat;
