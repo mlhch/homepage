@@ -1,0 +1,15 @@
+## https://docs.docker.com/compose/compose-file/
+
+version: "3.5"
+services:
+  dev:
+    build: ./
+    working_dir: /var/www
+    volumes:
+      - ../:/var/www
+    ports:
+      - 9000:9000
+      - 35729:35729
+    command: "grunt serve"
+    ## 发布时可改用
+    # command: "grunt serve:dist --force"
