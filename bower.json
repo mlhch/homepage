@@ -5,7 +5,7 @@
     "requirejs": "*",
     "d3": "~3.3.10",
     "modernizr": "~2.6.2",
-    "jquery": "~1.10.2",
+    "jquery": "~2.2.4",
     "font-awesome": "~4.0.3",
     "foundation": "~5.0.2",
     "momentjs": "~2.5.0",
