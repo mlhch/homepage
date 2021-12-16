@@ -44,8 +44,10 @@ require(['angular', 'moment', 'config'], function fn(angular, moment, config) {
                 }
                 $scope.showArticle = function(row) {
                     require(['fancybox'], function(fancybox) {
+                        fancybox.opts.tpl = fancybox.defaults.tpl; // 查看代码后的 bug 修补
                         fancybox.showLoading();
                         config.articleBlob(row.title, row.sha, function success(res) {
+                            res.content = '<p style="white-space:pre-wrap;">' + res.content + '</p>'; // jQuery需要有标签包围
                             fancybox(res.content, {
                                 title: res.title,
                                 margin: [50, 50, 50, 50]
