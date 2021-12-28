@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
         <link rel="stylesheet" href="bower_components/angular/angular-csp.css">
 
-        <link rel="stylesheet" href="styles/7b661c4b.main.css"/>
+        <link rel="stylesheet" href="styles/bb7dad57.main.css"/>
         <script src="scripts/vendor/32fa189c.modernizr.js"></script>
     </head>
     <body>
@@ -26,7 +26,7 @@
             <div class="wrap">
                 <a class="logo" href="./"><img src="images/logo.png" width="80"></a>
                 <a class="button radius secondary" href="//github.com/mlhch/homepage/">View On GitHub</a>
-                <div class="menu">
+                <div class="menu" i18n-selector="a">
                     <a href="#intro">Introduction</a>
                     <a href="#recent">Recent Updates</a>
                     <a href="#skills">Skills & Interests</a>
@@ -46,35 +46,60 @@
         </div> <!-- /header -->
         <div class="header-placeholder"></div>
 
+        <!-- 把 ng-cloak 放 body 上会影响 svg 上的 D3.js，因为 ng-cloak 被移除前相关元素处于隐藏状态 -->
+        <div class="ng-cloak" style="text-align: center">
+            <h3>当前时间：<br>{{now | date: 'medium'}}</h3>
+            <em class="guide">使用 angular-i18n 本地化显示日期</em>
+            <a ng-click="setLocale('zh-cn')">zh-cn</a>
+            <a ng-click="setLocale('en-us')">en-us</a>
+        </div>
+
         <div class="section intro">
             <a class="anchor" id="intro"></a>
-            <h1><i class="fa"></i> Introduction</h1>
+            <h1><i class="fa"></i> <span i18n-selector="">Introduction</span></h1>
             <div class="row">
                 <div class="small-12 small-centered medium-9 large-7 columns">
                     <p class="lead">
                         I'm a Software Engineer, dived into IT industry since 2006, and started software outsourcing experience since 2008.</p>
                     <p class="lead">
+                        我是一个软件工程师, 自2006年涉入IT行业, 于2008年开始积累软件外包经验。</p>
+                    <p class="lead">
                         I create this page for better self-presentation and make you could trust me as more as possible.
+                    </p>
+                    <p class="lead">
+                        为了更好地展示自己，我做了这个页面，以期加速建立和您的相互信任。
                     </p>
                     <ul>
                         <li>
                             <blockquote>
                                 From section <strong><a href="#recent">Recent Updates</a></strong> you can know my recent knowledge activities. Just to clarify, they are free notes rather than well organized articles.
+                                <p>
+                                    <strong><a href="#recent">最近更新</a></strong>区块列出了我最近有涉猎到的知识点。文章内容仅仅是随意的笔记，并非严谨的文章。
+                                </p>
                             </blockquote>
                         </li>
                         <li>
                             <blockquote>
                                 In section <strong><a href="#skills">Skills & Interests</a></strong> I separate out those skills that for sale, so that you can get a quick impression.
+                                <p>
+                                    在 <strong><a href="#skills" i18n-selector="">技能和兴趣</a></strong> 区块，我挑出了自己比较突出的技能树，以便您可以有一个快速的印象。
+                                </p>
                             </blockquote>
                         </li>
                         <li>
                             <blockquote>
                                 <strong><a href="#showcase">Showcase</a></strong> section show some of my previous examples. They are not all, but I'm preparing them little by little when I have spare time.
+                                <p>
+                                    <strong><a href="#showcase">项目案例</a></strong> 区块展示了我之前做过的部分项目，我会一点一滴地整理并丰富它的内容。
+                                </p>
                             </blockquote>
                         </li>
                         <li>
                             <blockquote>
                                 <strong><a href="#contact-me">Contact Me</a></strong> if you are interested in my abilities.
+                                <p>
+                                    如果您对我的能力感兴趣，请不要犹豫<strong><a href="#contact-me">联系我</a></strong>。
+                                </p>
                             </blockquote>
                         </li>
                     </ul>
@@ -83,7 +108,7 @@
         </div>
         <div class="section recent">
             <a class="anchor" id="recent"></a>
-            <h1><i class="fa fa-puzzle-piece"></i> Recent Updates</h1>
+            <h1><i class="fa fa-puzzle-piece"></i> <span i18n-selector="">Recent Updates</span></h1>
             <div class="text-center" ng-class="statusClasses[status]">
                 <span class="ng-hide" ng-show="errMsg">{{errMsg}}</span>
             </div>
@@ -106,10 +131,13 @@
         </div>
         <div class="section skills">
             <a class="anchor" id="skills"></a>
-            <h1 class="fa-inverse"><i class="fa fa-suitcase fa-inverse"></i> Skills & Interests</h1>
+            <h1 class="fa-inverse"><i class="fa fa-suitcase fa-inverse"></i> <span i18n-selector="">Skills & Interests</span></h1>
             <div class="row">
                 <p class="label text-left radius columns large-8 medium-8 small-7" style="background: transparent; white-space: normal">
                     Mouse over a showcase to highlight related skills
+                </p>
+                <p class="label text-left radius columns large-8 medium-8 small-7" style="background: transparent; white-space: normal">
+                    鼠标靠近可以放大字体
                 </p>
                 <label class="columns large-2 medium-2 small-2">
                     <input type="checkbox" name="Skill" checked="checked"> Skills</label>
@@ -123,7 +151,7 @@
         </div>
         <div class="section showcase">
             <a class="anchor" id="showcase"></a>
-            <h1 class="fa-inverse"><i class="fa fa-film"></i> Showcase</h1>
+            <h1 class="fa-inverse"><i class="fa fa-film"></i> <span i18n-selector="">Showcase</span></h1>
             <div class="snapshot hide">
                 <div class="image"><a target="_blank"><img></a></div>
                 <div class="name"></div>
@@ -133,7 +161,7 @@
         </div>
         <div class="section contact-me">
             <a class="anchor" id="contact-me"></a>
-            <h1><i class="fa fa-comments-o"></i> Contact Me</h1>
+            <h1><i class="fa fa-comments-o"></i> <span i18n-selector="">Contact Me</span></h1>
             <div class="row">
                 <div class="small-12 medium-9 large-8 columns">
                     <div id="map"></div>
@@ -167,6 +195,6 @@
           })();
         </script>
 
-        <script src="scripts/3e3f8bac.main.js"></script>
+        <script src="scripts/55a9bec6.main.js"></script>
 </body>
 </html>
